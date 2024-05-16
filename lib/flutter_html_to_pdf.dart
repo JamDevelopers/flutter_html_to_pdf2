@@ -38,14 +38,9 @@ class FlutterHtmlToPdf {
   }
 
   /// Assumes the invokeMethod call will return successfully
-  Future<String> _convertFromHtmlFilePath(String htmlFilePath) async {
-    // Add a timeout of 5 seconds
-    return await Future.timeout(
-      Duration(seconds: 25),
-      () async {
-         final result = await _channel.invokeMethod('convertHtmlToPdf', <String, dynamic>{'htmlFilePath': htmlFilePath});
+  static Future<String> _convertFromHtmlFilePath(String htmlFilePath) async {
+    final result = await _channel.invokeMethod(
+        'convertHtmlToPdf', <String, dynamic>{'htmlFilePath': htmlFilePath});
     return result as String;
-      },
-    );
-  }  
+  }
 }
